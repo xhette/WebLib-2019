@@ -1,0 +1,102 @@
+﻿@{
+    ViewData["Title"] = "WebLib | Лучший курсач по БД в мире!";
+}
+
+<header>
+    <div class="main-header lib-header">
+        <div class="lib-navbar">
+            <div class="lib-logo">
+                <a href="#">WebLib</a>
+            </div>
+            <ul class="navbar-items">
+                <li class="navbar-item"><a href="#">Вход | Регистрация</a></li>
+            </ul>
+        </div>
+
+        <div class="main-quote">
+            <div class="main-quote-text">
+                Библиотеки — это сокровищницы всех богатств человеческого духа.
+            </div>
+            <div class="main-quote-author">— Готфрид В. Лейбниц</div>
+        </div>
+
+        <button class="arrow-down" data-role="button"></button>
+    </div>
+</header>
+<main>
+    <div class="about-wrapper">
+        <div class="laptop">
+            <img src="~/images/O7BGQ41.png">
+        </div>
+        <div class="about-us">
+            <div class="about-title">
+                О НАС
+            </div>
+            <div class="about-text">
+                Данный сайт представляет собой автоматизированную библиотечную систему,
+                целью которой является удобство читателей и работников библиотеки.
+            </div>
+        </div>
+    </div>
+    <div class="opportunities-wrapper">
+        <div class="our-opportunities">
+            Наши преимущества
+        </div>
+        <div class="opportunity-wrapper">
+            <div class="opportunity">
+                <div class="opportunity-icon">
+                    <img src="~/images/4ed782b36bb3f7891a000034-750.jpg">
+                </div>
+                <div class="opportunity-text">
+                    Запись в библиотеку не выходя из дома
+                </div>
+            </div>
+            <div class="opportunity">
+                <div class="opportunity-icon">
+                    <img src="~/images/large.jpg">
+                </div>
+                <div class="opportunity-text">
+                    Удобная навигация по списку книг
+                </div>
+            </div>
+
+            <div class="opportunity">
+                <div class="opportunity-icon">
+                    <img src="~/images/coffee-tumblr-buscar-con-google-petits-bonheurs-pinterest-intended-for-writing-notebook-tumblr.jpg">
+                </div>
+                <div class="opportunity-text">
+                    Контроль сроков возврата книг
+                </div>
+            </div>
+        </div>
+
+        <div class="not-all">
+            И это далеко не всё!
+        </div>
+    </div>
+    <div id="answer-form-block">
+        <div id="contact-us">
+            Возник вопрос или предложение?<br> Свяжитесь с нами!
+        </div>
+        <div id="answer-form-block">
+            <div id="sender-info">
+                <div class="sender">
+                    <p><label for="sender-name">Имя: <span class="important-symbol">*</span></label></p>
+                    <input type="text" id="sender-name" class="input-form">
+                </div>
+                <div class="sender">
+                    <p><label for="sender-mail">E-mail: <span class="important-symbol">*</span></label></p>
+                    <input type="email" id="sender-mail" class="input-form">
+                </div>
+            </div>
+            <div id="message">
+                <label for="sender-message">Сообщение: <span class="important-symbol">*</span></label>
+                <textarea rows="6" id="sender-message" class="input-form"></textarea>
+            </div>
+            <button type="submit" id="send-message">ОТПРАВИТЬ</button>
+        </div>
+    </div>
+</main>
+<footer div class="main-footer">
+    Copyright (c) 2019. Created by Margo
+</footer>

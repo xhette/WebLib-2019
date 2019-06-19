@@ -1,0 +1,31 @@
+﻿
+@{
+    Layout = "_WorkLayout";
+    ViewData["Title"] = "WebLib | Добавление автора";
+}
+
+@model WebLib.Models.AuthorModel
+@Html.Partial("LibrarianBookMenu")
+
+@using (Html.BeginForm("AddAuthor", "Librarian", FormMethod.Post, new { @class = "input-wrapper" }))
+{
+    @Html.HiddenFor(m => m.Id)
+    <div class=input-form-area>
+        @Html.LabelFor(m => m.Surname, "Фамилия автора:")
+        @Html.ValidationMessageFor(m => m.Surname, null, new { @class = "validation-message dark" })
+        @Html.EditorFor(m => m.Surname, new { htmlAttributes = new { @class = "input-form" } })
+    </div>
+    <div class=input-form-area>
+        @Html.LabelFor(m => m.FirstName, "Имя автора:")
+        @Html.ValidationMessageFor(m => m.FirstName, null, new { @class = "validation-message dark" })
+        @Html.EditorFor(m => m.FirstName, new { htmlAttributes = new { @class = "input-form" } })
+    </div>
+    <div class=input-form-area>
+        @Html.LabelFor(m => m.Patronymic, "Отчество автора:")
+        <span class="validation-message dark"></span>
+        @Html.EditorFor(m => m.Patronymic, new { htmlAttributes = new { @class = "input-form" } })
+    </div>
+
+
+    <input type="submit" class="submit-button-gray" value="Сохранить" />
+}

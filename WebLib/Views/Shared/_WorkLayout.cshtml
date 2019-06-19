@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="ru">
+    <meta charset="UTF-8">
+    <title>@ViewData["Title"]</title>
+    <link href="~/css/main.css" rel="stylesheet">
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="js/main.js"></script>
+</head>
+<body>
+    <header>
+        <div class="work-page-header">
+            <div class="lib-navbar work-page-navigation">
+                <div class="lib-logo">
+                    <a href="#">WebLib</a>
+                </div>
+                <ul class="navbar-items">
+                    <li class="navbar-item user"><a href="#">Фамилия Имя Отчество</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <main class="work-page-main">
+        @RenderBody()
+    </main>
+</body>
+</html>
+

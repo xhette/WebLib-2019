@@ -1,0 +1,17 @@
+﻿@model IEnumerable<WebLib.Models.AuthorModel>
+
+<div class="db-list">
+    @foreach (WebLib.Models.AuthorModel author in Model)
+    {
+        <div class="list-author-department">
+            <div class="author-department-name">@author.Surname @author.FirstName @author.Patronymic</div>
+            <div class="edit-buttons-container list">
+                @Html.ActionLink("Изменить", "EditAuthor", "Librarian",
+                                         new { id = author.Id }, new { @class = "edit"})|
+                @Html.ActionLink("Удалить", "DeleteAuthor", "Librarian",
+                                                 new { id = author.Id }, new { @class = "delete"})
+            </div>
+        </div>
+    }
+</div>
+

@@ -1,0 +1,42 @@
+.about-wrapper
+    display: flex
+    justify-content: space-around
+    align-content: center
+    padding: 150px
+    background-color: #E8E8E8
+
+.about-us
+    margin: 60px
+    & .about-title
+        position: relative
+        font-size: 50px
+        font-style: bold
+        color: #A8732F
+        line-height: 80px
+        
+        &:after
+            content: ''
+            border-bottom: 2px solid #888888
+            width: 100%
+            position: absolute
+            bottom: 0
+            left: 0
+
+
+    & .about-text
+        margin-top: 10px
+        font-size: 25px
+        color: #636363
+
+
+.laptop
+    display: flex
+    flex: 0 0 auto
+    margin: 10px
+    height: 400px
+    width: 400px
+    & img
+        display: block
+        width: 100%
+        height: auto
+        object-fit: contain

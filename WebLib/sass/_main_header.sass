@@ -1,0 +1,129 @@
+.lib-header
+    display: flex
+    flex-direction: column
+    width: 100vw
+    max-height: 100vh
+    max-width: 100%
+    background-color: #808080
+    background-image: url("../images/tumblr_static_35q87ym.jpg")
+    background-position: 0 0
+    background-blend-mode: multiply
+    background-repeat: no-repeat
+    background-size: cover
+    color: #DBDBDB
+
+    & .lib-logo
+        & a 
+            color: #E6E6E6
+            &:visited, &:hover
+                color: #E6E6E6
+
+
+    & .main-quote
+        display: flex
+        flex-direction: column
+        justify-self: center
+        align-self: center
+        justify-content: space-around
+        flex: 1 1 auto
+        margin: 60px
+        padding: 60px
+        font-size: 50px
+
+        & .main-quote-author
+            text-align: right
+            font-size: 30px
+
+
+    & .arrow-down
+        position: relative
+        display: flex 
+        flex: 0 0 auto
+        align-self: center
+        justify-self: center
+        margin: 25px
+        border-radius: 50%
+        border: 2px solid #CFCFCF
+        background-color: transparent
+        height: 60px
+        width: 60px 
+        outline: none
+        cursor: pointer
+        &:before
+            content: '↓'
+            position: absolute
+            height: auto
+            width: auto
+            color: #CFCFCF
+            font-size: 35px
+            top: 0.1em 
+            left: 0 
+            bottom: 0 
+            right: 0
+            margin: auto
+        
+        &:hover
+            &:before
+                content: '↓'
+                position: absolute
+                height: auto
+                width: auto
+                color: #CFCFCF
+                font-size: 39px
+                top: 0.1em 
+                left: 0 
+                bottom: 0 
+                right: 0
+                margin: auto
+                transition: ease-out 0.1s
+
+.lib-navbar 
+    background: tranparent
+    height: 40px
+    width: inherited
+    display: flex
+    padding: 20px 60px
+
+
+    & .lib-logo
+        display: flex
+        flex: 1 0 auto
+        font-size: 30px
+
+    & .navbar-items
+        list-style: none
+        display: flex
+        flex: 0 1 auto
+        justify-self: flex-end
+        font-size: 20px
+        & .navbar-item
+            margin-left: 50px
+            color: #F2F2F2
+        & a
+            &:hover
+                border-bottom: 2px solid #f2f2f2
+
+    & a
+        display: table
+        color: #F2F2F2
+        line-height: 40px
+        &:visited
+            color: #F2F2F2
+
+.work-page-navigation
+    background: #191919
+    border-bottom: 1px solid #000
+    & li.user
+        position: relative
+        padding-left: 50px
+        &::before
+            content: ''
+            background-image: url("../images/avatar.png")
+            position: absolute
+            height: 30px
+            width: 30px
+            background-size: cover
+            background-position: center
+            left: 0
+            top: 5%
+

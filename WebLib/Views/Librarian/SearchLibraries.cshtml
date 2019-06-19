@@ -1,0 +1,21 @@
+﻿
+@model IEnumerable<WebLib.Models.LibraryModel>
+
+<div class="db-list">
+    @if (Model != null)
+    {
+        @foreach (WebLib.Models.LibraryModel library in Model)
+        {
+            <div class="list-library-shop">
+                <div class="library-shop-name">
+                    @library.Name
+                </div>
+                <div class="library-shop-adress">
+                    <ul class="list-item-info">
+                        <li><span class="list-info-part">Адрес: </span>@library.Adress</li>
+                    </ul>
+                </div>
+            </div>
+        }
+    }
+</div>

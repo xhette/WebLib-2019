@@ -1,0 +1,58 @@
+.input-wrapper
+    width: 75%
+    display: flex
+    flex-direction: column
+    padding: 10em 2em
+    flex: 1 1 auto
+    align-items: center
+
+.input-form-area
+    height: 80px
+    margin: 1em 0
+    display: flex
+    flex-direction: column
+    & input.input-form
+        border: 1px solid #707070
+        width: 500px
+        height: 30px
+        font-size: 20px
+        outline: none
+    & label
+        font-size: 20px
+
+    & select.select-drop-list
+        border: 1px solid #707070
+        width: 500px
+        height: 30px
+        font-size: 20px
+        outline: none
+
+    
+.validation-message
+    height: 12px
+    width: 100%
+    font-size: 12px
+    margin-bottom: 10px
+    &.dark
+        color: #707070
+
+.submit-button-gray
+    flex: 0 1 auto
+    margin-top: 70px
+    width: 300px
+    height: 50px
+    text-decoration: none
+    border: 1px solid $dark-orange
+    background-color: $orange
+    color: $bg
+    border-radius: 10px
+    font-weight: 500
+    font-size: 20px
+    cursor: pointer
+    outline: none
+    &:hover
+        background-color: $dark-orange
+    &:active
+        background-color: $bg
+        color: $dark-orange
+        border: 2px solid $dark-orange

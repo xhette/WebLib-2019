@@ -1,0 +1,164 @@
+.list-grid
+    width: 100%
+    display: flex
+    flex-direction: column
+    padding: 2em
+    flex: 1 1 auto
+
+.db-list
+    margin: 2em 0
+    display: flex
+    justify-content: flex-start
+    align-content: flex-start
+    flex-wrap: wrap
+    flex: 1 1 auto
+
+.list-item
+    border: 1px solid #A8732F
+    padding: 1em
+    color: #656565
+    font-size: 14px
+    margin: 20px
+    line-height: 22px
+    width: 250px
+
+.list-item-title
+    color: #A8732F
+    font-size: 20px
+    text-align: center
+    font-weight: 600
+    margin-bottom: 15px
+    padding-bottom: 20px
+    padding-top: 5px
+
+a.edit
+    margin-right: 5px
+a.delete
+    margin-left: 5px
+
+a.edit, a.delete, a.shop-link
+    color: #444
+    font-size: 16px
+    &:hover
+        color: #A8732F
+
+a.shop-link
+    font-size: 14px
+
+.list-info-part
+    font-weight: 600
+
+.list-author-department
+    display: flex
+    justify-content: space-between
+    margin-left: 6em
+    margin-right: 6em
+    margin-bottom: 30px
+    width: 100%
+    padding: 1em
+    border: 1px solid #afafaf
+    border-left: 4px solid #afafaf
+
+.author-department-name
+    color: #A8732F
+    font-weight: 600
+    font-size: 20px
+
+a.author-department-link
+    color: #A8732F
+    &:hover
+        color: #C98022
+
+.list-library-shop
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    margin-bottom: 30px
+    width: 250px
+    padding: 1em
+    color: #656565
+    font-size: 14px
+    border: 1px solid #afafaf
+    border-left: 4px solid #afafaf
+    border-right: 4px solid #afafaf
+
+span.library-shop-adress-span
+    font-weight: 600
+    font-size: 16px
+
+.library-shop-name
+    color: #A8732F
+    font-size: 20px
+    text-align: center
+    font-weight: 600
+    margin-bottom: 15px
+    padding-bottom: 20px
+    padding-top: 5px
+    border-bottom: 1px solid #afafaf
+
+a.library-shop-link
+    color: #A8732F
+    &:hover
+        color: #C98022
+
+.edit-buttons-container
+    margin-top: 10px
+    padding-top: 10px
+    display: flex
+    justify-content: flex-end
+    border-top: 1px solid #A8732F
+    &.list
+        margin-top: 0px
+        padding-top: 0px
+        border-top: none
+    &.reader
+        border-top: 1px solid #afafaf
+
+
+ul.edit-and-delete li
+    display: inline
+
+.work-pagination
+    align-self: center
+    color: #9A9A9A
+    flex: 0 1 auto
+    justify-self: flex-end
+
+    a.number-page-link, a.arrow-page-link
+        color: #9A9A9A
+        &:hover
+            color: #565656
+    a.selected-page
+        pointer-events: none
+        color: #A8732F
+        &:hover
+            color: #A8732F
+
+    span.points 
+        cursor: default
+
+.add-item-to-db
+    margin-right: 2em
+    align-self: flex-end
+    text-align: center
+    padding: auto
+    font-size: 20px
+    font-weight: 600
+
+a.add-item
+    color: #656565
+    &:hover
+        color: #A8732F
+    &:before
+        content: '+'
+        margin-bottom: 20px
+        height: 5px
+        width: 5px
+
+.list-reader
+    margin-left: 6em
+    margin-right: 6em
+    margin-bottom: 1em
+    padding: 1em
+    width: 100%
+    border: 2px solid #A8732F
