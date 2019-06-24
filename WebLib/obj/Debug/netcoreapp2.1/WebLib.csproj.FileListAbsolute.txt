@@ -42,3 +42,5 @@ Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Admin
 Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Admin\AddLibrary.g.cshtml.cs
 Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Admin\Departments.g.cshtml.cs
 Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Shared\SearchDepartments.g.cshtml.cs
+Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Admin\EditDepartment.g.cshtml.cs
+Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Admin\AddDepartment.g.cshtml.cs
