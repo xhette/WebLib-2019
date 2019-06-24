@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using WebLib.Models;
 using WebLib.Models.Repositories;
 using WebLib.Models.Repositories.CompositeModels.Books;
+using WebLib.Models.Repositories.CompositeModels.Deliveries;
 using WebLib.Models.Repositories.CompositeModels.Departments;
 using WebLib.Models.Repositories.CompositeModels.Issues;
 
@@ -397,7 +398,8 @@ namespace WebLib.Controllers
                     DeliveryRepository.Add(model);
 
                 }
-                catch (SqlException ex) { }
+                catch (SqlException ex) {
+                }
 
                 return RedirectToAction("Deliveries", "Admin");
             }

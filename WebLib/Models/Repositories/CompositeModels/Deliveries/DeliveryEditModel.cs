@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebLib.Models.Repositories
+namespace WebLib.Models.Repositories.CompositeModels.Deliveries
 {
     public class DeliveryEditModel
     {

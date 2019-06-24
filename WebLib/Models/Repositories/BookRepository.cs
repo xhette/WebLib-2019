@@ -61,7 +61,19 @@ namespace WebLib.Models.Repositories
 
             return book;
         }
-        
+
+        public static BookModel DataToDeliveryModel(DataRow row)
+        {
+            BookModel book = new BookModel
+            {
+                Id = row.Field<int>("book_id"),
+                AuthorId = row.Field<int>("author"),
+                Title = row.Field<string>("title")
+            };
+
+            return book;
+        }
+
         public static List<BookModel> Books(string query)
         {
             List<BookModel> books = new List<BookModel>();

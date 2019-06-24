@@ -1,4 +1,5 @@
 ﻿
+
 @{
     Layout = "_WorkLayout";
     ViewData["Title"] = "WebLib | Изменение отдела";
@@ -8,7 +9,7 @@
 
 @Html.Partial("LibrarianBookMenu")
 
-@using (Html.BeginForm("EditDepartment", "Admin", FormMethod.Post, new { @class = "input-wrapper" }))
+@using (Html.BeginForm("AddDepartment", "Admin", FormMethod.Post, new { @class = "input-wrapper" }))
 {
     @Html.HiddenFor(m => m.Department.Id)
     <div class=input-form-area>

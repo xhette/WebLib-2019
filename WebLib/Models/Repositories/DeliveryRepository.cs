@@ -9,7 +9,8 @@ namespace WebLib.Models.Repositories
 {
     public class DeliveryRepository
     {
-        private static string primalQuery = String.Format("select * from Deliveries join Shops on shop = shop_id ");
+        private static string primalQuery = String.Format
+            ("select * from (Authors join (Books join (Deliveries join Shops on shop = shop_id) on book = book_id) on author = author_id) ");
 
         public static DeliveryModel DataToModel(DataRow row)
         {
@@ -19,6 +20,7 @@ namespace WebLib.Models.Repositories
                 BookId = row.Field<int>("book"),
                 Amount = row.Field<int>("amount"),
                 Cost = row.Field<double>("cost"),
+                Summ = row.Field<double>("summ"),
                 Shop = row.Field<int>("shop")
             };
         }
@@ -27,6 +29,8 @@ namespace WebLib.Models.Repositories
         {
             return new DeliveryViewModel
             {
+                Author = AuthorRepository.DataToModel(row),
+                Book = BookRepository.DataToDeliveryModel(row),
                 Delivery = DataToModel(row),
                 Shop = ShopRepository.DataToModel(row)
             };
@@ -60,13 +64,14 @@ namespace WebLib.Models.Repositories
 
             DeliveryEditModel model = new DeliveryEditModel
             {
-                Delivery = delivery
+                Delivery = delivery,
+                SelectedShop = delivery.Shop
             };
 
             model.Shops = new Microsoft.AspNetCore.Mvc.Rendering.SelectList(
-                ShopRepository.SelectAll(), "Id", "Name", model.Delivery.Shop);
+                ShopRepository.SelectAll(), "Id", "Name", model.SelectedShop);
 
-            model.Book = BookRepository.DataToModel(DbContext.DbConnection(String.Format
+            model.Book = BookRepository.DataToDeliveryModel(DbContext.DbConnection(String.Format
                 ("select * from Books where book_id = {0}", model.Delivery.BookId)).Tables[0].Rows[0]);
 
             model.Author = AuthorRepository.DataToModel(DbContext.DbConnection(String.Format
@@ -80,7 +85,7 @@ namespace WebLib.Models.Repositories
             if (model.Author.Patronymic == null) model.Author.Patronymic = "";
             string query = String.Format("exec UpdateDeliveries {0}, {1}, '{2}', '{3}', '{4}', '{5}', {6}, {7}, {8}",
                 model.Delivery.Id, model.Delivery.BookId, model.Author.Surname, model.Author.FirstName, model.Author.Patronymic,
-                model.Book.Title, model.Delivery.Cost, model.Delivery.Amount, model.SelectedShop);
+                model.Book.Title, model.Delivery.Amount, model.Delivery.Cost, model.SelectedShop);
             DataSet data = DbContext.DbConnection(query);
         }
 
@@ -107,7 +112,7 @@ namespace WebLib.Models.Repositories
         public static void Add(DeliveryEditModel model)
         {
             if (model.Author.Patronymic == null) model.Author.Patronymic = "";
-            string query = String.Format("exec AddDelivery '{0}' '{1}', '{2}', '{3}', {4}, {5}, {6}",
+            string query = String.Format("exec AddDelivery '{0}', '{1}', '{2}', '{3}', {4}, {5}, {6}",
                 model.Author.Surname, model.Author.FirstName, model.Author.Patronymic, model.Book.Title, model.Delivery.Amount,
                 model.Delivery.Cost, model.SelectedShop);
             DataSet data = DbContext.DbConnection(query);
