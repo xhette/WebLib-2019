@@ -130,5 +130,11 @@ namespace WebLib.Models.Repositories
 
             DataSet data = DbContext.DbConnection(sqlQuery);
         }
+
+        public static void Delete (int id)
+        {
+            string query = String.Format("delete from Departments where department_id = {0}", id);
+            DataSet data = DbContext.DbConnection(query);
+        }
     }
 }

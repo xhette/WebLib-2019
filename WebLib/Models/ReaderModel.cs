@@ -23,5 +23,12 @@ namespace WebLib.Models
 
         [Required(ErrorMessage = "Пожалуйста, заполните это поле")]
         public string Adress { get; set; }
+        
+        public string ConcatReaderName
+        {
+            get {
+                return String.Format("{0} {1} {2}", Surname, FirstName, Patronymic);
+            }
+        }
     }
 }

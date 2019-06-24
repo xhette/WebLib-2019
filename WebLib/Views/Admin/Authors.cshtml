@@ -1,0 +1,51 @@
+﻿@{
+    Layout = "_WorkLayout";
+    ViewData["Title"] = "WebLib | Просмотр авторов";
+}
+
+@model IEnumerable<WebLib.Models.AuthorModel>
+
+@Html.Partial("LibrarianBookMenu")
+
+
+
+<div class="list-grid">
+
+    <div class="add-item-to-db">
+        @Html.ActionLink("Добавить", "AddAuthor", "Admin", null, new { @class = "add-item" })
+    </div>
+
+    <div class="db-list">
+        @foreach (WebLib.Models.AuthorModel author in Model)
+        {
+            <div class="list-author-department">
+                <div class="author-department-name">@author.Surname @author.FirstName @author.Patronymic</div>
+                <div class="edit-buttons-container list">
+                    @Html.ActionLink("Изменить", "EditAuthor", "Admin",
+                                             new { id = author.Id }, new { @class = "edit"})|
+                    @Html.ActionLink("Удалить", "DeleteAuthor", "Admin",
+                                                     new { id = author.Id }, new { @class = "delete"})
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+
+        $('.db-search').change(function()
+        {
+            var id = $(this).val();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("SearchAuthors")/',
+                data: { symbols: id },
+                success: function (data) {
+
+                    $('.db-list').replaceWith(data);
+                }
+            });
+        });
+    })
+</script>

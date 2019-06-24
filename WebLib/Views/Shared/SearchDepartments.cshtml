@@ -1,0 +1,29 @@
+﻿@model IEnumerable<WebLib.Models.Repositories.CompositeModels.Departments.DepartmentViewModel>
+
+<div class="db-list">
+
+    @if (Model != null)
+    {
+        @foreach (WebLib.Models.Repositories.CompositeModels.Departments.DepartmentViewModel lib in Model)
+        {
+            <div class="list-department">
+                <div class="department-library-name">@lib.Library.Name</div>
+                <ul class="list-item-department">
+                    @foreach (WebLib.Models.DepartmentModel department in lib.DepartmentsInLibrary)
+                    {
+                        <li class="li-department">
+                            @department.Name
+
+                            <div class="edit-buttons-container list">
+                                @Html.ActionLink("Изменить", "EditDepartment", "Admin",
+                                                   new { id = department.Id}, new { @class = "edit"})|
+                                @Html.ActionLink("Удалить", "DeleteDepartment", "Admin",
+                                                         new { id = department.Id }, new { @class = "delete"})
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+    }
+</div>

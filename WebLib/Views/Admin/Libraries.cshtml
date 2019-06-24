@@ -1,0 +1,64 @@
+﻿@{
+    Layout = "_WorkLayout";
+    ViewData["Title"] = "WebLib | Просмотр библиотек";
+}
+
+@model IEnumerable<WebLib.Models.LibraryModel>
+
+@Html.Partial("LibrarianBookMenu")
+
+
+
+<div class="list-grid">
+
+    <div class="add-item-to-db">
+        @Html.ActionLink("Добавить", "AddLibrary", "Admin", null, new { @class = "add-item" })
+    </div>
+
+    <div class="db-list">
+
+        @if (Model != null)
+        {
+            @foreach (WebLib.Models.LibraryModel library in Model)
+            {
+        <div class="list-library-shop">
+            <div class="library-shop-name">
+                @library.Name
+            </div>
+            <div class="library-shop-adress">
+                <ul class="list-item-info">
+                    <li><span class="list-info-part">Адрес: </span>@library.Adress</li>
+                </ul>
+            </div>
+            <div class="edit-buttons-container list">
+                @Html.ActionLink("Изменить", "EditLibrary", "Admin",
+                                   new { id = library.Id}, new { @class = "edit"})|
+                @Html.ActionLink("Удалить", "DeleteLibrary", "Admin",
+                                         new { id = library.Id }, new { @class = "delete"})
+            </div>
+        </div>
+            }
+        }
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+
+        $('.db-search').change(function()
+        {
+            var id = $(this).val();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("SearchLibraries")/',
+                data: { symbols: id },
+                success: function (data) {
+
+                    $('.db-list').replaceWith(data);
+                }
+            });
+        });
+    })
+</script>
+

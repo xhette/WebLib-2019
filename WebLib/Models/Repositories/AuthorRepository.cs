@@ -32,6 +32,14 @@ namespace WebLib.Models.Repositories
             return authors;
         }
 
+        public static List<AuthorModel> SelectById(int id)
+        {
+            string sqlQuery = String.Format("select * from Authors where author_id = {0}", id);
+            List<AuthorModel> authors = AuthorList(sqlQuery);
+            return authors;
+        }
+
+
         public static List<AuthorModel> SelectAll()
         {
             string sqlQuery = String.Format("select * from Authors");

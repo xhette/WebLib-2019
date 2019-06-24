@@ -1,0 +1,62 @@
+﻿@{
+    Layout = "_WorkLayout";
+    ViewData["Title"] = "WebLib | Просмотр книг";
+}
+
+@model IEnumerable<WebLib.Models.Repositories.CompositeModels.Books.BookViewModel>
+
+@Html.Partial("LibrarianBookMenu")
+
+
+
+<div class = "list-grid">
+    
+    <div class="add-item-to-db"> 
+        @Html.ActionLink("Добавить", "AddBook", "Admin", null, new { @class = "add-item" })
+    </div>
+
+    <div class="db-list">
+        @if (Model != null)
+        {
+            foreach (WebLib.Models.Repositories.CompositeModels.Books.BookViewModel book in Model)
+            {
+                <div class="list-item">
+                    <div class="list-item-title">
+                        "@book.Book.Title"
+                    </div>
+                    <ul class="list-item-info">
+                        <li><span class="list-info-part">Автор: </span>@book.Author.Surname @book.Author.FirstName @book.Author.Patronymic</li>
+                        <li><span class="list-info-part">Отдел: </span>@book.Department.Name</li>
+                        <li><span class="list-info-part">Библиотека: </span>@book.Library.Name</li>
+                    </ul>
+                    <div class="edit-buttons-container">
+                        @Html.ActionLink("Изменить", "EditBook", "Admin",
+                                                 new { id = book.Book.Id }, new { @class = "edit"})|
+                        @Html.ActionLink("Удалить", "DeleteBook", "Admin",
+                                                 new { id = book.Book.Id }, new { @class = "delete"})
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    $(function () {
+
+        $('.db-search').change(function()
+        {
+            var id = $(this).val();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("SearchBooks")/',
+                data: { symbols: id },
+                success: function (data) {
+
+                    $('.db-list').replaceWith(data);
+                }
+            });
+        });
+    })
+</script>

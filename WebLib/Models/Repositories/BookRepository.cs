@@ -9,7 +9,7 @@ namespace WebLib.Models.Repositories
     public class BookRepository
     {
         private static string getBookListQuery = String.Format
-            ("select * from (Authors join (Books join (Departments join Libraries on in_library = lib_id) on department_id = department) on author_id = author)) ");
+            ("select * from (Authors join (Books join (Departments join Libraries on in_library = lib_id) on department_id = department) on author_id = author) ");
 
         public static BookViewModel DataToViewModel (DataRow row)
         {
@@ -62,6 +62,35 @@ namespace WebLib.Models.Repositories
             return book;
         }
         
+        public static List<BookModel> Books(string query)
+        {
+            List<BookModel> books = new List<BookModel>();
+            DataSet data = DbContext.DbConnection(query);
+
+            foreach (DataRow row in data.Tables[0].Rows)
+            {
+                books.Add(DataToModel(row));
+            }
+
+            return books;
+        }
+
+        public static List<BookModel> AllBooks()
+        {
+            return Books("select * from Books where department is not null");
+        }
+
+        public static List<BookModel> AllBooksByAuthor(int id)
+        {
+            string query = String.Format("select * from Books where author = {0} and department is not null", id);
+            return Books(query);
+        }
+
+        public static List<BookViewModel> AllBooksFromDeliveries()
+        {
+            string query = string.Format("select * from (Authors join Books on author_id = author) where department is null");
+            return BookList(query);
+        }
 
         public static List<BookViewModel> BookList(string sqlQuery)
         {
@@ -78,21 +107,20 @@ namespace WebLib.Models.Repositories
 
         public static List<BookViewModel> SelectAll()
         {
-            string sqlQuery = String.Format("select * from Books");
-            List<BookViewModel> books = BookList(sqlQuery);
+            List<BookViewModel> books = BookList(getBookListQuery);
             return books;
         }
 
         public static List<BookViewModel> SelectBySearch(string symbols)
         {
-            string sqlQuery = String.Format (getBookListQuery + String.Format("where title like '%{0}%'", symbols));
+            string sqlQuery = String.Format (getBookListQuery + String.Format("where title like '%{0}%' and department is not null", symbols));
             List<BookViewModel> books = BookList(sqlQuery);
             return books;
         }
 
         public static List<BookViewModel> SelectByAuthor(int authorId)
         {
-            string sqlQuery = String.Format(getBookListQuery + String.Format("where author = {0}", authorId));
+            string sqlQuery = String.Format(getBookListQuery + String.Format("where author = {0} and department is not null", authorId));
             List<BookViewModel> books = BookList(sqlQuery);
             return books;
         }

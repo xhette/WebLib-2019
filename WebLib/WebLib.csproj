@@ -12,8 +12,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Reader\" />
+    <Folder Include="Views\Librarian\" />
     <Folder Include="Views\Provider\" />
+    <Folder Include="Views\Reader\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Shared\LibrarianBookMenu.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
   </ItemGroup>
 
 </Project>

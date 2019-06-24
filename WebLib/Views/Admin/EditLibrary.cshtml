@@ -1,0 +1,26 @@
+﻿
+@{
+    Layout = "_WorkLayout";
+    ViewData["Title"] = "WebLib | Изменение библиотеки";
+}
+
+@model WebLib.Models.LibraryModel
+@Html.Partial("LibrarianBookMenu")
+
+@using (Html.BeginForm("EditLibrary", "Admin", FormMethod.Post, new { @class = "input-wrapper" }))
+{
+    @Html.HiddenFor(m => m.Id)
+    <div class=input-form-area>
+        @Html.LabelFor(m => m.Name, "Название:")
+        @Html.ValidationMessageFor(m => m.Name, null, new { @class = "validation-message dark" })
+        @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "input-form" } })
+    </div>
+    <div class=input-form-area>
+        @Html.LabelFor(m => m.Adress, "Адрес:")
+        @Html.ValidationMessageFor(m => m.Adress, null, new { @class = "validation-message dark" })
+        @Html.EditorFor(m => m.Adress, new { htmlAttributes = new { @class = "input-form" } })
+    </div>
+
+
+    <input type="submit" class="submit-button-gray" value="Сохранить" />
+}
