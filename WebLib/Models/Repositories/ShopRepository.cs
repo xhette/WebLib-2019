@@ -47,7 +47,7 @@ namespace WebLib.Models.Repositories
 
         public static void Add(ShopModel model)
         {
-            string query = String.Format("insert into Shops (shop_name, shop_adress, shop_telephone) values ({0}, '{1}', '{2}')",
+            string query = String.Format("insert into Shops (shop_name, shop_adress, shop_telephone) values ('{0}', '{1}', '{2}')",
                 model.Name, model.Adress, model.PhoneNumber);
             DataSet set = DbContext.DbConnection(query);
         }
@@ -61,7 +61,7 @@ namespace WebLib.Models.Repositories
 
         public static void Edit (ShopModel model)
         {
-            string query = String.Format("update set Shops set (shop_name = {0}, shop_adress = '{1}', shop_telephone = '{2}') where shop_id = {3}",
+            string query = String.Format("update Shops set shop_name = '{0}', shop_adress = '{1}', shop_telephone = '{2}' where shop_id = {3}",
                 model.Name, model.Adress, model.PhoneNumber, model.Id);
             DataSet data = DbContext.DbConnection(query);
         }

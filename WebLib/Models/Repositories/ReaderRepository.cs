@@ -51,10 +51,20 @@ namespace WebLib.Models.Repositories
         public static List<ReaderModel> SelectBySearch(string symbols)
         {
             string query = String.Format
-                ("select * from Readers  (reader_surname like '%{0}%') or (reader_name like '%{0}%') or (reader_patronymic like '%{0}%')", symbols);
+                ("select * from Readers where (reader_surname like '%{0}%') or (reader_name like '%{0}%') or (reader_patronymic like '%{0}%')", symbols);
             List<ReaderModel> readers = ReaderList(query);
             return readers;
         }
+
+        public static List<ReaderModel> SelectByDeptorsSearch(string symbols)
+        {
+            string query = String.Format
+                ("select reader_card, reader_surname, reader_name, reader_patronymic, reader_adress, reader_phone from Readers join Issues on reader = reader_card where ((reader_surname like '%{0}%') or (reader_name like '%{0}%') or (reader_patronymic like '%{0}%')) and (issue_date <= DATEADD(DAY, -14, SYSDATETIME())) and(return_date IS NULL)", 
+                symbols);
+            List<ReaderModel> readers = ReaderList(query);
+            return readers;
+        }
+
 
         public static List<ReaderModel> SelectDeptors()
         {

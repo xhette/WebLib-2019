@@ -554,7 +554,8 @@ namespace WebLib.Controllers
                 {
                     ShopRepository.Edit(model);
                 }
-                catch (SqlException ex) { }
+                catch (SqlException ex) {
+                }
 
                 return RedirectToAction("Shops", "Admin");
             }
@@ -592,6 +593,11 @@ namespace WebLib.Controllers
         public ViewResult Deptors()
         {
             return View(ReaderRepository.SelectDeptors());
+        }
+
+        public ViewResult SearchDeptors(string symbols)
+        {
+            return View(ReaderRepository.SelectByDeptorsSearch(symbols));
         }
 
         [HttpGet]

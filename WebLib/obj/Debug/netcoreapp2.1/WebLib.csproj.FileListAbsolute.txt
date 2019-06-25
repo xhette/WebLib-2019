@@ -47,3 +47,13 @@ Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Admin
 Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Admin\Deliveries.g.cshtml.cs
 Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Admin\EditDelivery.g.cshtml.cs
 Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Admin\AddDelivery.g.cshtml.cs
+Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Admin\Shops.g.cshtml.cs
+Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Shared\SearchShops.g.cshtml.cs
+Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Admin\EditShop.g.cshtml.cs
+Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Admin\AddShop.g.cshtml.cs
+Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Admin\Readers.g.cshtml.cs
+Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Admin\Deptors.g.cshtml.cs
+Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Shared\SearchReaders.g.cshtml.cs
+Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Admin\EditReader.g.cshtml.cs
+Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Admin\AddReader.g.cshtml.cs
+Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Shared\SearchDeptors.g.cshtml.cs
