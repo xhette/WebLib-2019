@@ -5,7 +5,7 @@
 }
 
 @model WebLib.Models.Repositories.CompositeModels.Books.BookEditModel
-@Html.Partial("LibrarianBookMenu")
+@Html.Partial("_AdminBookMenu")
 
     @using (Html.BeginForm("AddBook", "Admin", FormMethod.Post, new { @class = "input-wrapper" }))
     {
@@ -59,7 +59,7 @@
             var id = $(this).val();
             $.ajax({
                 type: 'GET',
-                url: '@Url.Action("DepartmentsByLibrary")/',
+                url: '@Url.Action("DepartmentListByLibrary")/',
                 data: { index: id },
                 success: function (data) {
 

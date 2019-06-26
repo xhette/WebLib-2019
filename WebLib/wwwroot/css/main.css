@@ -417,7 +417,13 @@ ul {
   font-size: 14px;
   margin: 20px;
   line-height: 22px;
-  width: 250px; }
+  width: 250px;
+  position: relative; }
+
+.add-to-issue {
+  position: absolute;
+  right: 0;
+  top: -25px; }
 
 .list-item-title {
   color: #A8732F;
@@ -434,10 +440,10 @@ a.edit {
 a.delete {
   margin-left: 5px; }
 
-a.edit, a.delete, a.shop-link {
+a.edit, a.delete, a.shop-link, a.add-to-issue {
   color: #444;
   font-size: 16px; }
-  a.edit:hover, a.delete:hover, a.shop-link:hover {
+  a.edit:hover, a.delete:hover, a.shop-link:hover, a.add-to-issue:hover {
     color: #A8732F; }
 
 a.shop-link {
@@ -619,6 +625,11 @@ a.add-item {
     outline: none; }
   .input-form-area label {
     font-size: 20px; }
+  .input-form-area::-webkit-clear-button {
+    -webkit-appearance: none;
+    display: none; }
+  .input-form-area::-ms-clear {
+    display: none; }
   .input-form-area select.select-drop-list {
     border: 1px solid #707070;
     width: 500px;

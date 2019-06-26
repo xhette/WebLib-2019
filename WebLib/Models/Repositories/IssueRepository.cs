@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -15,15 +16,28 @@ namespace WebLib.Models.Repositories
 
         public static IssueModel DataToModel(DataRow row)
         {
-            IssueModel issue = new IssueModel
+            IssueModel issue;
+            try
             {
-                Id = row.Field<int>("issue_id"),
-                BookId = row.Field<int>("book"),
-                ReaderId = row.Field<int>("reader"),
-                OccupiedDate = row.Field<DateTime>("issue_date"),
-                ReturnedDate = row.Field<DateTime>("return_date"),
-                IsReturned = row.Field<bool>("returned")
-            };
+                issue = new IssueModel
+                {
+                    Id = row.Field<int>("issue_id"),
+                    BookId = row.Field<int>("book"),
+                    ReaderId = row.Field<int>("reader"),
+                    OccupiedDate = row.Field<DateTime>("issue_date"),
+                    ReturnedDate = row.Field<DateTime>("return_date")
+                };
+            } catch (Exception ex)
+            {
+                issue = new IssueModel
+                {
+                    Id = row.Field<int>("issue_id"),
+                    BookId = row.Field<int>("book"),
+                    ReaderId = row.Field<int>("reader"),
+                    OccupiedDate = row.Field<DateTime>("issue_date"),
+                    ReturnedDate = null
+                };
+            }
 
             return issue;
         }
@@ -63,28 +77,31 @@ namespace WebLib.Models.Repositories
 
         public static List<IssueViewModel> SelectExpired()
         {
-            string query = String.Format(issueViewQuery + "(issue_date <= DATEADD(DAY, -14, SYSDATETIME())) and (return_date IS NULL)");
+            string query = String.Format(issueViewQuery + "where (issue_date <= DATEADD(DAY, -14, SYSDATETIME())) and (return_date IS NULL)");
             return IssueList(query);
         }
 
-        public static IssueEditModel Add()
+        public static IssueAddModel Add(int id)
         {
-            IssueEditModel model = new IssueEditModel
+            string bookquery = String.Format("select * from Books join Authors on author = author_id where book_id = {0}", id);
+            DataSet data = DbContext.DbConnection(bookquery);
+            IssueAddModel model = new IssueAddModel
             {
-                Issue = new IssueModel()
+                Issue = new IssueModel {
+                    OccupiedDate = DateTime.Now
+                },
+                Book = (BookRepository.DataToModel(data.Tables[0].Rows[0])),
+                Author = (AuthorRepository.DataToModel(data.Tables[0].Rows[0]))
             };
 
             model.Readers = new SelectList(ReaderRepository.SelectAll(), "Id", "ConcatReaderName");
-            model.Authors = new SelectList(AuthorRepository.SelectAll(), "Id", "ConcatName");
-            model.Books = new SelectList(BookRepository.AllBooks(), "Id", "Title");
-
             return model;
         }
 
-        public static void Add(IssueEditModel model)
+        public static void Add(IssueAddModel model)
         {
-            string query = String.Format("insert into Issues (book, reader, issue_date) values ({0}, {1}, {2})",
-                model.SelectedBook, model.SelectedReader, model.Issue.OccupiedDate);
+            string query = String.Format("insert into Issues (book, reader, issue_date) values ({0}, {1}, '{2}')",
+                model.Book.Id, model.SelectedReader, model.Issue.OccupiedDate.ToString("yyyy-MM-dd"));
             DataSet data = DbContext.DbConnection(query);
         }
 
@@ -94,19 +111,31 @@ namespace WebLib.Models.Repositories
             DataSet data = DbContext.DbConnection(query);
         }
 
-        public static IssueViewModel Edit (int id)
+        public static IssueAddModel Edit (int id)
         {
             string query = String.Format(issueViewQuery + "where issue_id = {0}", id);
             DataSet data = DbContext.DbConnection(query);
-            IssueViewModel model = DataToViewModel(data.Tables[0].Rows[0]);
+            IssueAddModel model = new IssueAddModel
+            {
+                Issue = DataToModel(data.Tables[0].Rows[0]),
+                Author = AuthorRepository.DataToModel(data.Tables[0].Rows[0]),
+                Book = BookRepository.DataToModel(data.Tables[0].Rows[0])
+            };
+            model.Readers = new SelectList(ReaderRepository.SelectAll(), "Id", "ConcatReaderName", model.Issue.ReaderId);
 
             return model;
         }
 
-        public static void Edit (IssueEditModel model)
+        public static void Edit (IssueAddModel model)
         {
-            string query = String.Format("update table Issues set return_date = {0} where issue_id = {1}", 
-                model.Issue.ReturnedDate, model.Issue.Id);
+            string query;
+            if (model.Issue.ReturnedDate.HasValue)
+            query = String.Format("update Issues set reader = {2}, issue_date = '{3}',  return_date = '{0}' where issue_id = {1}", 
+                model.Issue.ReturnedDate.Value.ToString("yyyy-MM-dd"), model.Issue.Id, 
+                model.SelectedReader, model.Issue.OccupiedDate.ToString("yyyy-MM-dd"));
+            else query = String.Format("update Issues set reader = {2}, issue_date = '{3}', return_date = {0} where issue_id = {1}",
+                null, model.Issue.Id,
+                model.SelectedReader, model.Issue.OccupiedDate.ToString("yyyy-MM-dd"));
             DataSet data = DbContext.DbConnection(query);
         }
 

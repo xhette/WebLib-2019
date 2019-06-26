@@ -4,8 +4,9 @@
 }
 
 @model IEnumerable<WebLib.Models.Repositories.CompositeModels.Books.BookViewModel>
+@using WebLib.Models.Repositories
 
-@Html.Partial("LibrarianBookMenu")
+@Html.Partial("_AdminBookMenu")
 
 
 
@@ -20,22 +21,28 @@
         {
             foreach (WebLib.Models.Repositories.CompositeModels.Books.BookViewModel book in Model)
             {
-                <div class="list-item">
-                    <div class="list-item-title">
-                        "@book.Book.Title"
-                    </div>
-                    <ul class="list-item-info">
-                        <li><span class="list-info-part">Автор: </span>@book.Author.Surname @book.Author.FirstName @book.Author.Patronymic</li>
-                        <li><span class="list-info-part">Отдел: </span>@book.Department.Name</li>
-                        <li><span class="list-info-part">Библиотека: </span>@book.Library.Name</li>
-                    </ul>
-                    <div class="edit-buttons-container">
-                        @Html.ActionLink("Изменить", "EditBook", "Admin",
-                                                 new { id = book.Book.Id }, new { @class = "edit"})|
-                        @Html.ActionLink("Удалить", "DeleteBook", "Admin",
-                                                 new { id = book.Book.Id }, new { @class = "delete"})
-                    </div>
-                </div>
+        <div class="list-item">
+                @if (!BookRepository.IsTaken(book.Book.Id))
+                {
+            @Html.ActionLink("Выдать", "AddIssue", "Admin",
+                                                    new { id = book.Book.Id }, new { @class = "add-to-issue" })
+                }
+
+            <div class="list-item-title">
+                "@book.Book.Title"
+            </div>
+            <ul class="list-item-info">
+                <li><span class="list-info-part">Автор: </span>@book.Author.Surname @book.Author.FirstName @book.Author.Patronymic</li>
+                <li><span class="list-info-part">Отдел: </span>@book.Department.Name</li>
+                <li><span class="list-info-part">Библиотека: </span>@book.Library.Name</li>
+            </ul>
+            <div class="edit-buttons-container">
+                @Html.ActionLink("Изменить", "EditBook", "Admin",
+                                         new { id = book.Book.Id }, new { @class = "edit"})|
+                @Html.ActionLink("Удалить", "DeleteBook", "Admin",
+                                         new { id = book.Book.Id }, new { @class = "delete"})
+            </div>
+        </div>
             }
         }
     </div>

@@ -200,12 +200,6 @@ namespace WebLib.Controllers
             return View(DepartmentRepository.SelectViewBySearch(symbols));
         }
 
-        //partialView
-        public ViewResult DepartmentsByLibrary (int id)
-        {
-            return View(DepartmentRepository.SelectByLibrary(id));
-        }
-
         [HttpGet]
         public ViewResult EditDepartment (int id)
         {
@@ -436,14 +430,22 @@ namespace WebLib.Controllers
         }
 
         [HttpGet]
-        public ViewResult AddIssue()
+        public ActionResult AddIssue(int id)
         {
-            return View(IssueRepository.Add());
+            bool flag = BookRepository.IsTaken(id);
+
+            if (!flag)
+            {
+                return View(IssueRepository.Add(id));
+            }
+            else return RedirectToAction("Books", "Admin");
         }
 
         [HttpPost]
-        public ActionResult AddIssue(IssueEditModel model)
+        public ActionResult AddIssue(IssueAddModel model)
         {
+            model.Readers = new SelectList(ReaderRepository.SelectAll(), "Id", "ConcatReaderName");
+
             if (ModelState.IsValid)
             {
                 try
@@ -451,7 +453,8 @@ namespace WebLib.Controllers
                     IssueRepository.Add(model);
 
                 }
-                catch (SqlException ex) { }
+                catch (SqlException ex) {
+                }
 
                 return RedirectToAction("Issues", "Admin");
             }
@@ -468,8 +471,10 @@ namespace WebLib.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditIssue (IssueEditModel model)
+        public ActionResult EditIssue (IssueAddModel model)
         {
+            model.Readers = new SelectList(ReaderRepository.SelectAll(), "Id", "ConcatReaderName");
+
             if (ModelState.IsValid)
             {
                 try
@@ -477,7 +482,8 @@ namespace WebLib.Controllers
                     IssueRepository.Edit(model);
 
                 }
-                catch (SqlException ex) { }
+                catch (SqlException ex) {
+                }
 
                 return RedirectToAction("Issues", "Admin");
             }
@@ -661,6 +667,15 @@ namespace WebLib.Controllers
 
         #endregion
 
+
+        #region ForDinamicDropDownList
+        
+        public ViewResult DepartmentListByLibrary(int id)
+        {
+            return View(DepartmentRepository.SelectByLibrary(id));
+        }
+
+        #endregion
     }
 }
 

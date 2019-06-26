@@ -1,8 +1,0 @@
-﻿@model IEnumerable<WebLib.Models.DepartmentModel>
-
-<select id="department-list" name="SelectedDepartmentId" class="select-drop-list">
-    @foreach (WebLib.Models.DepartmentModel item in Model)
-    {
-        <option value="@item.Id">@item.Name</option>
-    }
-</select>

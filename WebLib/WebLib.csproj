@@ -12,12 +12,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Librarian\" />
     <Folder Include="Views\Provider\" />
     <Folder Include="Views\Reader\" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Views\Admin\_AdminBookMenu.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Librarian\_LibrarianBookMenu.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\Shared\LibrarianBookMenu.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

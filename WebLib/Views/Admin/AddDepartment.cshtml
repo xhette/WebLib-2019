@@ -7,7 +7,7 @@
 
 @model WebLib.Models.Repositories.CompositeModels.Departments.DepartmentEditModel
 
-@Html.Partial("LibrarianBookMenu")
+@Html.Partial("_AdminBookMenu")
 
 @using (Html.BeginForm("AddDepartment", "Admin", FormMethod.Post, new { @class = "input-wrapper" }))
 {

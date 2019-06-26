@@ -5,7 +5,7 @@
 }
 
 @model WebLib.Models.AuthorModel
-@Html.Partial("LibrarianBookMenu")
+@Html.Partial("_AdminBookMenu")
 
 @using (Html.BeginForm("EditAuthor", "Admin", FormMethod.Post, new { @class = "input-wrapper" }))
 {

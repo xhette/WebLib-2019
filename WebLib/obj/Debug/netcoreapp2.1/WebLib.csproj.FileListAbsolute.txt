@@ -33,7 +33,6 @@ Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Admin
 Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Admin\EditAuthor.g.cshtml.cs
 Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Admin\EditBook.g.cshtml.cs
 Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Admin\Libraries.g.cshtml.cs
-Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Shared\DepartmentsByLibrary.g.cshtml.cs
 Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Shared\LibrarianBookMenu.g.cshtml.cs
 Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Shared\SearchAuthors.g.cshtml.cs
 Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Shared\SearchBooks.g.cshtml.cs
@@ -57,3 +56,10 @@ Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Share
 Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Admin\EditReader.g.cshtml.cs
 Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Admin\AddReader.g.cshtml.cs
 Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Shared\SearchDeptors.g.cshtml.cs
+Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Admin\Issues.g.cshtml.cs
+Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Admin\ExpiredIssues.g.cshtml.cs
+Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Shared\DepartmentListByLibrary.g.cshtml.cs
+Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Admin\AddIssue.g.cshtml.cs
+Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Admin\EditIssue.g.cshtml.cs
+Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Admin\_AdminBookMenu.g.cshtml.cs
+Q:\stydying\3K2S\BD\mine\WebLib\WebLib\obj\Debug\netcoreapp2.1\Razor\Views\Librarian\_LibrarianBookMenu.g.cshtml.cs

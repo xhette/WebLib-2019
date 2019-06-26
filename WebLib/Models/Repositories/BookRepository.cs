@@ -62,6 +62,21 @@ namespace WebLib.Models.Repositories
             return book;
         }
 
+        public static List<BookModel> BooksInIssues()
+        {
+            string query = String.Format("select * from (Books join Issues on book = book_id) where return_date is null");
+            return Books(query);
+        }
+
+        public static bool IsTaken (int id)
+        {
+            List<BookModel> books = BooksInIssues();
+            BookModel book = DataToModel(DbContext.DbConnection(String.Format(
+                "select * from books where book_id = {0}", id)).Tables[0].Rows[0]);
+            if (books.Exists(x => x.Id == book.Id)) return true;
+            else return false;
+        }
+
         public static BookModel DataToDeliveryModel(DataRow row)
         {
             BookModel book = new BookModel
