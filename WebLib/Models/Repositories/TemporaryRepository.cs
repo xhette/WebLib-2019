@@ -19,7 +19,7 @@ namespace WebLib.Models
             this.redo = 0;
             this.TempJournal = new List<TemporaryModel>();
 
-            string query = String.Format("select * from _TempJournal");
+            string query = String.Format("select * from _TempJournal order by operation_time ");
             DataSet journalData = DbContext.DbConnection(query);
 
             foreach (DataRow row in journalData.Tables[0].Rows)
@@ -33,6 +33,109 @@ namespace WebLib.Models
                     ColumnId = row.Field<int>("column_id")
                 });
             }
+        }
+
+        public void Undone()
+        {
+            redo = 0;
+            string valid = "";
+            string tableName = "";
+            string tempTableName = "";
+            string idName = "";
+
+            switch (TempJournal[undo].TableName)
+            {
+                case "Authors": 
+                    tableName = "Authors";
+                    tempTableName = "Authors_History";
+                    idName = "author_id";
+                    break;
+                case "Books":
+                    tableName = "Books";
+                    tempTableName = "Books_History";
+                    idName = "book_id";
+                    break;
+                case "Deliveries":
+                    tableName = "Deliveries";
+                    tempTableName = "Deliveries_History";
+                    idName = "delivery_id";
+                    break;
+                case "Departments":
+                    tableName = "Departments";
+                    tempTableName = "Departments_History";
+                    idName = "department_id";
+                    break;
+                case "Issues":
+                    tableName = "Issues";
+                    tempTableName = "Issues_History";
+                    idName = "issue_id";
+                    break;
+                case "Libraries":
+                    tableName = "Libraries";
+                    tempTableName = "Libraries_History";
+                    idName = "lib_id";
+                    break;
+                case "Readers": 
+                    tableName = "Readers";
+                    tempTableName = "Readers_History";
+                    idName = "reader_card";
+                    break;
+                case "Roles":
+                    tableName = "Roles";
+                    tempTableName = "Roles_History";
+                    idName = "role_id";
+                    break;
+                case "Shops":
+                    tableName = "Shops";
+                    tempTableName = "Shops_History";
+                    idName = "shop_id";
+                    break;
+                case "Users":
+                    tableName = "Users";
+                    tempTableName = "Users_History";
+                    idName = "user_id";
+                    break;
+                default: break;
+            }
+
+            if (TempJournal[undo].OperationName.Equals("insert"))
+                valid = String.Format("ValidFrom");
+            else valid = String.Format("ValidTo");
+
+            string tempQuery = String.Format("select * from {0} where ({1} = {2}) and ({3} = {4})",
+                tempTableName, idName, TempJournal[undo].ColumnId, valid, TempJournal[undo].OperationDate);
+
+            DataSet data = DbContext.DbConnection(tempQuery);
+
+            switch (TempJournal[undo].TableName)
+            {
+                case "Authors":
+                    break;
+                case "Books":
+                    break;
+                case "Deliveries":
+                    break;
+                case "Departments":
+                    break;
+                case "Issues":
+                    break;
+                case "Libraries":
+                    break;
+                case "Readers":
+                    break;
+                case "Roles":
+                    break;
+                case "Shops":
+                    break;
+                case "Users":
+                    break;
+                default: break;
+            }
+        }
+
+        public void Redone()
+        {
+
         }
     }
 }
