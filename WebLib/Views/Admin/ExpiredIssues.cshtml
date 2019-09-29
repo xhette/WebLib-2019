@@ -1,0 +1,48 @@
+﻿@{
+    Layout = "_WorkLayout";
+    ViewData["Title"] = "WebLib | Выдачи";
+}
+
+@model IEnumerable<WebLib.Models.Repositories.CompositeModels.Issues.IssueViewModel>
+
+@Html.Partial("_AdminBookMenu")
+
+<div class="list-grid">
+
+    <div class="add-item-to-db">
+        @Html.ActionLink("Добавить", "AddIssue", "Admin", null, new { @class = "add-item" })
+    </div>
+
+    <div class="db-list">
+
+        @foreach (WebLib.Models.Repositories.CompositeModels.Issues.IssueViewModel issue in Model)
+        {
+            <div class="list-reader">
+                <ul class="list-item-info">
+                    <li><span class="list-info-part">Читатель: </span> @issue.Reader.ConcatReaderName</li>
+                    <li><span class="list-info-part">Книга: </span> @issue.Author.ConcatName "@issue.Book.Title"</li>
+                    <li><span class="list-info-part">Дата взятия: </span>@issue.Issue.OccupiedDate.ToShortDateString()</li>
+                    <li>
+                        <span class="list-info-part">Дата возврата: </span>
+                        @if (issue.Issue.ReturnedDate == null)
+                        {
+                            <span>-</span>
+                        }
+                        else
+                        {
+                            <span>@issue.Issue.ReturnedDate.Value.ToShortDateString()</span>
+                        }
+                    </li>
+                </ul>
+                <div class="edit-buttons-container reader">
+                    @Html.ActionLink("Изменить", "EditIssue", "Admin",
+                                             new { id = issue.Issue.Id }, new { @class = "edit"})|
+                    @Html.ActionLink("Удалить", "DeleteIssue", "Admin",
+                                                     new { id = issue.Issue.Id }, new { @class = "delete"})
+                </div>
+
+            </div>
+        }
+
+    </div>
+</div>

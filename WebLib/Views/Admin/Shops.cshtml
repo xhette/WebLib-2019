@@ -1,0 +1,65 @@
+﻿@{
+    Layout = "_WorkLayout";
+    ViewData["Title"] = "WebLib | Просмотр магазинов";
+}
+
+
+@model IEnumerable<WebLib.Models.ShopModel>
+
+@Html.Partial("_AdminBookMenu")
+
+
+
+<div class="list-grid">
+
+    <div class="add-item-to-db">
+        @Html.ActionLink("Добавить", "AddShop", "Admin", null, new { @class = "add-item" })
+    </div>
+
+    <div class="db-list">
+
+        @if (Model != null)
+        {
+            @foreach (WebLib.Models.ShopModel shop in Model)
+            {
+                <div class="list-library-shop">
+                    <div class="library-shop-name">
+                        @shop.Name
+                    </div>
+                    <div class="library-shop-adress">
+                        <ul class="list-item-info">
+                            <li><span class="list-info-part">Адрес: </span>@shop.Adress</li>
+                            <li><span class="list-info-part">Телефон: </span>@shop.PhoneNumber</li>
+                        </ul>
+                    </div>
+                    <div class="edit-buttons-container list">
+                        @Html.ActionLink("Изменить", "EditShop", "Admin",
+                                           new { id = shop.Id}, new { @class = "edit"})|
+                        @Html.ActionLink("Удалить", "DeleteShop", "Admin",
+                                                 new { id = shop.Id }, new { @class = "delete"})
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+
+        $('.db-search').change(function()
+        {
+            var id = $(this).val();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("SearchShops")/',
+                data: { symbols: id },
+                success: function (data) {
+
+                    $('.db-list').replaceWith(data);
+                }
+            });
+        });
+    })
+</script>

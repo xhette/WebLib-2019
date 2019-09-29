@@ -1,0 +1,41 @@
+﻿ <div class="work-page-menu">
+        <nav class="menu-navigation">
+            <input type="text" placeholder="Поиск" class="db-search">
+            <span class="menu-title">
+                ПАНЕЛЬ ВСЕВЛАСТИЯ
+            </span>
+            <ul class="menu-navigation-items">
+                <li class="menu-item">
+                    @Html.ActionLink("Авторы", "Authors", "Admin", null, new { @class = "menu-item-link" })
+                </li>
+                <li class="menu-item">
+                    @Html.ActionLink("Книги", "Books", "Admin", null, new { @class = "menu-item-link" })
+                </li>
+                <li class="menu-item">
+                    @Html.ActionLink("Отделы", "Departments", "Admin", null, new { @class = "menu-item-link" })
+                </li>
+                <li class="menu-item">
+                    @Html.ActionLink("Поставки", "Deliveries", "Admin", null, new { @class = "menu-item-link" })
+                </li>
+                <li class="menu-item">
+                    @Html.ActionLink("Выдачи", "Issues", "Admin", null, new { @class = "menu-item-link" })
+                </li>
+                <li class="menu-item">
+                    @Html.ActionLink("Истекший срок", "ExpiredIssues", "Admin", null, new { @class = "menu-item-link" })
+                </li>
+                <li class="menu-item">
+                    @Html.ActionLink("Читатели", "Readers", "Admin", null, new { @class = "menu-item-link" })
+                </li>
+                <li class="menu-item">
+                    @Html.ActionLink("Должники", "Deptors", "Admin", null, new { @class = "menu-item-link" })
+                </li>
+                <li class="menu-item">
+                    @Html.ActionLink("Магазины", "Shops", "Admin", null, new { @class = "menu-item-link" })
+                </li>
+            </ul>
+        </nav>
+        <footer class="work-footer">
+            Copyright (c) 2019<br>
+            Created by Margo
+        </footer>
+    </div>

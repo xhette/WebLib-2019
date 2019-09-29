@@ -58,9 +58,9 @@
         {
             var id = $(this).val();
             $.ajax({
-                type: 'GET',
+                type: 'POST',
                 url: '@Url.Action("DepartmentListByLibrary")/',
-                data: { index: id },
+                data: { id: id },
                 success: function (data) {
 
                     $('#department-list').replaceWith(data);

@@ -1,0 +1,40 @@
+﻿@{
+    Layout = "_WorkLayout";
+    ViewData["Title"] = "WebLib | Просмотр поставок";
+}
+
+@model IEnumerable<WebLib.Models.Repositories.CompositeModels.Deliveries.DeliveryViewModel>
+
+@Html.Partial("_AdminBookMenu")
+
+<div class="list-grid">
+
+    <div class="add-item-to-db">
+        @Html.ActionLink("Добавить", "AddDelivery", "Admin", null, new { @class = "add-item" })
+    </div>
+
+    <div class="db-list">
+        @if (Model != null)
+        {
+            @foreach (WebLib.Models.Repositories.CompositeModels.Deliveries.DeliveryViewModel delivery in Model)
+            {
+            <div class="list-item">
+                <ul class="list-item-info">
+                    <li><span class="list-info-part">Автор: </span> @delivery.Author.ConcatName</li>
+                    <li><span class="list-info-part">Название: </span> "@delivery.Book.Title"</li>
+                    <li><span class="list-info-part">Цена: </span> @delivery.Delivery.Cost</li>
+                    <li><span class="list-info-part">Количество: </span> @delivery.Delivery.Amount</li>
+                    <li><span class="list-info-part">Суммарная стоимость: </span> @delivery.Delivery.Summ</li>
+                    <li><span class="list-info-part">Магазин: </span> "@delivery.Shop.Name"</li>
+                </ul>
+                <div class="edit-buttons-container">
+                    @Html.ActionLink("Изменить", "EditDelivery", "Admin",
+                                             new { id = delivery.Delivery.Id}, new { @class = "edit"})|
+                    @Html.ActionLink("Удалить", "DeleteDelivery", "Admin",
+                                             new { id = delivery.Delivery.Id }, new { @class = "delete"})
+                </div>
+            </div>
+                }
+            }
+    </div>
+</div>

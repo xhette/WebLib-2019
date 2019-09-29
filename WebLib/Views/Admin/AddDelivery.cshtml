@@ -1,0 +1,56 @@
+﻿
+@{
+    Layout = "_WorkLayout";
+    ViewData["Title"] = "WebLib | Добавление поставки";
+}
+
+@model WebLib.Models.Repositories.CompositeModels.Deliveries.DeliveryEditModel
+@Html.Partial("_AdminBookMenu")
+
+@using (Html.BeginForm("AddDelivery", "Admin", FormMethod.Post, new { @class = "input-wrapper" }))
+{
+    @Html.HiddenFor(m => m.Book.Id)
+    @Html.HiddenFor(m => m.Book.AuthorId)
+    @Html.HiddenFor(m => m.Author.Id)
+    @Html.HiddenFor(m => m.Delivery.Id)
+    @Html.HiddenFor(m => m.Delivery.BookId)
+
+    <div class=input-form-area>
+        @Html.LabelFor(m => m.Author.Surname, "Фамилия автора:")
+        @Html.ValidationMessageFor(m => m.Author.Surname, null, new { @class = "validation-message dark" })
+        @Html.EditorFor(m => m.Author.Surname, new { htmlAttributes = new { @class = "input-form" } })
+    </div>
+    <div class=input-form-area>
+        @Html.LabelFor(m => m.Author.FirstName, "Имя автора:")
+        @Html.ValidationMessageFor(m => m.Author.FirstName, null, new { @class = "validation-message dark" })
+        @Html.EditorFor(m => m.Author.FirstName, new { htmlAttributes = new { @class = "input-form" } })
+    </div>
+    <div class=input-form-area>
+        @Html.LabelFor(m => m.Author.Patronymic, "Отчество автора:")
+        <span class="validation-message dark"></span>
+        @Html.EditorFor(m => m.Author.Patronymic, new { htmlAttributes = new { @class = "input-form" } })
+    </div>
+    <div class=input-form-area>
+        @Html.LabelFor(m => m.Book.Title, "Название: ")
+        @Html.ValidationMessageFor(m => m.Book.Title, null, new { @class = "validation-message dark" })
+        @Html.EditorFor(m => m.Book.Title, new { htmlAttributes = new { @class = "input-form" } })
+    </div>
+    <div class=input-form-area>
+        @Html.LabelFor(m => m.Delivery.Amount, "Количество: ")
+        @Html.ValidationMessageFor(m => m.Delivery.Amount, null, new { @class = "validation-message dark" })
+        @Html.EditorFor(m => m.Delivery.Amount, new { htmlAttributes = new { @class = "input-form" } })
+    </div>
+    <div class=input-form-area>
+        @Html.LabelFor(m => m.Delivery.Cost, "Цена: ")
+        @Html.ValidationMessageFor(m => m.Delivery.Cost, null, new { @class = "validation-message dark" })
+        @Html.EditorFor(m => m.Delivery.Cost, new { htmlAttributes = new { @class = "input-form" } })
+    </div>
+    <div class=input-form-area>
+        @Html.LabelFor(m => m.SelectedShop, "Магазин:")
+        <span class="validation-message dark"></span>
+        @Html.DropDownListFor(m => m.SelectedShop, Model.Shops as SelectList, new { @class = "select-drop-list", id = "library-list" })
+    </div>
+
+    <input type="submit" class="submit-button-gray" value="Сохранить" />
+}
+

@@ -1,0 +1,41 @@
+﻿
+@{
+    Layout = "_WorkLayout";
+    ViewData["Title"] = "WebLib | Выдать книгу";
+}
+
+@model WebLib.Models.Repositories.CompositeModels.Issues.IssueAddModel
+@Html.Partial("_AdminBookMenu")
+
+@using (Html.BeginForm("AddIssue", "Admin", FormMethod.Post, new { @class = "input-wrapper" }))
+{
+    @Html.HiddenFor(m => m.Book.Id)
+    @Html.HiddenFor(m => m.Book.Title)
+    @Html.HiddenFor(m => m.Issue.Id)
+    @Html.HiddenFor(m => m.Author.Surname)
+    @Html.HiddenFor(m => m.Author.FirstName)
+    @Html.HiddenFor(m => m.Author.Patronymic)
+    @Html.HiddenFor(m => m.Readers)
+
+    <div class=input-form-area>
+        <label>
+            <p>Автор: @Model.Author.ConcatName </p>
+            <p>Название: "@Model.Book.Title"</p>
+        </label>
+    </div>
+
+    <div class=input-form-area>
+        @Html.LabelFor(m => m.SelectedReader, "Читатель:")
+        <span class="validation-message dark"></span>
+        @Html.DropDownListFor(m => m.SelectedReader, Model.Readers as SelectList, new { @class = "select-drop-list", id = "reader-list" })
+    </div>
+
+    <div class=input-form-area>
+        @Html.LabelFor(m => m.Issue.OccupiedDate, "Дата выдачи: ")
+        @Html.ValidationMessageFor(m => m.Issue.OccupiedDate, null, new { @class = "validation-message dark" })
+        @Html.EditorFor(m => m.Issue.OccupiedDate, new { htmlAttributes = new { @class = "input-form", id = "datepicker" } })
+    </div>
+
+    <input type="submit" class="submit-button-gray" value="Сохранить" />
+
+}

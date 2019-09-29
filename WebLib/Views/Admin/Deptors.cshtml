@@ -1,0 +1,52 @@
+﻿
+@{
+    Layout = "_WorkLayout";
+    ViewData["Title"] = "WebLib | Просмотр задолжников";
+}
+
+
+@model IEnumerable<WebLib.Models.ReaderModel>
+
+@Html.Partial("_AdminBookMenu")
+
+
+
+<div class="list-grid">
+
+    <div class="db-list">
+
+        @foreach (WebLib.Models.ReaderModel reader in Model)
+        {
+            <div class="list-reader">
+                <ul class="list-item-info">
+                    <li><span class="list-info-part">Фамилия: </span> @reader.Surname</li>
+                    <li><span class="list-info-part">Имя: </span> @reader.FirstName</li>
+                    <li><span class="list-info-part">Отчество: </span> @reader.Patronymic</li>
+                    <li><span class="list-info-part">Адрес: </span>@reader.Adress</li>
+                    <li><span class="list-info-part">Телефон: </span>@reader.PhoneNumber</li>
+                </ul>
+
+            </div>
+        }
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+
+        $('.db-search').change(function()
+        {
+            var id = $(this).val();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("SearchDeptors")/',
+                data: { symbols: id },
+                success: function (data) {
+
+                    $('.db-list').replaceWith(data);
+                }
+            });
+        });
+    })
+</script>

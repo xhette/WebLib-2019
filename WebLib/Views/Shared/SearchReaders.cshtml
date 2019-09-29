@@ -1,0 +1,23 @@
+﻿
+<div class="db-list">
+
+    @foreach (WebLib.Models.ReaderModel reader in Model)
+    {
+        <div class="list-reader">
+            <ul class="list-item-info">
+                <li><span class="list-info-part">Фамилия: </span> @reader.Surname</li>
+                <li><span class="list-info-part">Имя: </span> @reader.FirstName</li>
+                <li><span class="list-info-part">Отчество: </span> @reader.Patronymic</li>
+                <li><span class="list-info-part">Адрес: </span>@reader.Adress</li>
+                <li><span class="list-info-part">Телефон: </span>@reader.PhoneNumber</li>
+            </ul>
+            <div class="edit-buttons-container reader">
+                @Html.ActionLink("Изменить", "EditReader", "Admin",
+                                         new { id = reader.Id }, new { @class = "edit"})|
+                @Html.ActionLink("Удалить", "DeleteReader", "Admin",
+                                                 new { id = reader.Id }, new { @class = "delete"})
+            </div>
+
+        </div>
+    }
+</div>
