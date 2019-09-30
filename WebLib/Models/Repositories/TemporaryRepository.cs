@@ -151,7 +151,23 @@ namespace WebLib.Models
                 "author_id", TempJournal[index].ColumnId);
             DataSet tempData = DbContext.DbConnection(tempQuery);
             AuthorModel author = AuthorRepository.DataToModel(tempData.Tables[0].Rows[0]);
-            AuthorRepository.Add(author);
+            AuthorRepository.Edit(author);
+        }
+
+        private void Books (int index)
+        {
+            string tempQuery;
+            if (TempJournal[index].OperationName.Equals("insert")) tempQuery = String.Format("select * from {0} for system_time as of '{1}' where {2} = {3}",
+                "Books", TempJournal[index].OperationDate.ToString(),
+                "book_id", TempJournal[index].ColumnId);
+            else tempQuery = String.Format("select * from {0} for system_time contained in ('2001-01-01 00:00:00.00', '{1}') where {2} = {3}",
+                "Books", TempJournal[index].OperationDate.ToString(),
+                "book_id", TempJournal[index].ColumnId);
+            DataSet tempData = DbContext.DbConnection(tempQuery);
+            BookModel book = BookRepository.DataToModel(tempData.Tables[0].Rows[0]);
+            string query = String.Format("update Books set author = {0}, title = '{1}', department = {2} where book_id = {3}",
+                book.AuthorId, book.Title, book.DepartmentId, book.Id);
+            DataSet data = DbContext.DbConnection(query);
         }
 
         private void Libraries(int index)
@@ -165,7 +181,61 @@ namespace WebLib.Models
                 "lib_id", TempJournal[index].ColumnId);
             DataSet tempData = DbContext.DbConnection(tempQuery);
             LibraryModel library = LibraryRepository.DataToModel(tempData.Tables[0].Rows[0]);
-            LibraryRepository.Add(library);
+            LibraryRepository.Edit(library);
+        }
+
+        private void Deliveries(int index)
+        {
+            string tempQuery;
+            if (TempJournal[index].OperationName.Equals("insert")) tempQuery = String.Format("select * from {0} for system_time as of '{1}' where {2} = {3}",
+                "Deliveries", TempJournal[index].OperationDate.ToString(),
+                "delivery_id", TempJournal[index].ColumnId);
+            else tempQuery = String.Format("select * from {0} for system_time contained in ('2001-01-01 00:00:00.00', '{1}') where {2} = {3}",
+                "Deliveries", TempJournal[index].OperationDate.ToString(),
+                "delivery_id", TempJournal[index].ColumnId);
+            DataSet tempData = DbContext.DbConnection(tempQuery);
+            DeliveryModel delivery = DeliveryRepository.DataToModel(tempData.Tables[0].Rows[0]);
+            string query = String.Format("update Deliveries set book = {0}, amount = {1}, cost = {2}, summ = {3}, shop = {4} where delivery_id = {5}",
+                delivery.BookId, delivery.Amount, delivery.Cost, delivery.Summ, delivery.Shop, delivery.Id);
+            DataSet data = DbContext.DbConnection(query);
+        }
+
+        private void Issues(int index)
+        {
+            string tempQuery;
+            if (TempJournal[index].OperationName.Equals("insert")) tempQuery = String.Format("select * from {0} for system_time as of '{1}' where {2} = {3}",
+                "Issues", TempJournal[index].OperationDate.ToString(),
+                "issue_id", TempJournal[index].ColumnId);
+            else tempQuery = String.Format("select * from {0} for system_time contained in ('2001-01-01 00:00:00.00', '{1}') where {2} = {3}",
+                "Issues", TempJournal[index].OperationDate.ToString(),
+                "issue_id", TempJournal[index].ColumnId);
+            DataSet tempData = DbContext.DbConnection(tempQuery);
+            IssueModel issue = IssueRepository.DataToModel(tempData.Tables[0].Rows[0]);
+            string query = "";
+            if (issue.ReturnedDate.HasValue)
+                query = String.Format("update Issues set reader = {2}, issue_date = '{3}',  return_date = '{0}' where issue_id = {1}",
+                    issue.ReturnedDate.Value.ToString("yyyy-MM-dd"), issue.Id,
+                    issue.ReaderId, issue.OccupiedDate.ToString("yyyy-MM-dd"));
+            else query = String.Format("update Issues set reader = {2}, issue_date = '{3}',  return_date = '{0}' where issue_id = {1}",
+                    null, issue.Id,
+                    issue.ReaderId, issue.OccupiedDate.ToString("yyyy-MM-dd"));
+            DataSet data = DbContext.DbConnection(query);
+        }
+
+        private void Departments(int index)
+        {
+            string tempQuery;
+            if (TempJournal[index].OperationName.Equals("insert")) tempQuery = String.Format("select * from {0} for system_time as of '{1}' where {2} = {3}",
+                "Departments", TempJournal[index].OperationDate.ToString(),
+                "department_id", TempJournal[index].ColumnId);
+            else tempQuery = String.Format("select * from {0} for system_time contained in ('2001-01-01 00:00:00.00', '{1}') where {2} = {3}",
+                "Departments", TempJournal[index].OperationDate.ToString(),
+                "department_id", TempJournal[index].ColumnId);
+            DataSet tempData = DbContext.DbConnection(tempQuery);
+            DepartmentModel department = DepartmentRepository.DataToModel(tempData.Tables[0].Rows[0]);
+            string query = String.Format("update Departments set department_name = {0}, in_library = {1} where department_id = {2}",
+                department.Name, department.LibraryId, department.Id);
+            DataSet data = DbContext.DbConnection(query);
         }
 
         private void Shops(int index)
@@ -179,7 +249,21 @@ namespace WebLib.Models
                 "shop_id", TempJournal[index].ColumnId);
             DataSet tempData = DbContext.DbConnection(tempQuery);
             ShopModel shop = ShopRepository.DataToModel(tempData.Tables[0].Rows[0]);
-            ShopRepository.Add(shop);
+            ShopRepository.Edit(shop);
+        }
+
+        private void Libraries(int index)
+        {
+            string tempQuery;
+            if (TempJournal[index].OperationName.Equals("insert")) tempQuery = String.Format("select * from {0} for system_time as of '{1}' where {2} = {3}",
+                "Readers", TempJournal[index].OperationDate.ToString(),
+                "reader_card", TempJournal[index].ColumnId);
+            else tempQuery = String.Format("select * from {0} for system_time contained in ('2001-01-01 00:00:00.00', '{1}') where {2} = {3}",
+                "Readers", TempJournal[index].OperationDate.ToString(),
+                "reader_card", TempJournal[index].ColumnId);
+            DataSet tempData = DbContext.DbConnection(tempQuery);
+            ReaderModel reader = ReaderRepository.DataToModel(tempData.Tables[0].Rows[0]);
+            LibraryRepository.Edit(reader);
         }
     }
 }
