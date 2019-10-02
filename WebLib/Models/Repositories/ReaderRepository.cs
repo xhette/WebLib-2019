@@ -19,7 +19,8 @@ namespace WebLib.Models.Repositories
                 FirstName = row.Field<string>("reader_name"),
                 Patronymic = row.Field<string>("reader_patronymic"),
                 PhoneNumber = row.Field<string>("reader_phone"),
-                Adress = row.Field<string>("reader_adress")
+                Adress = row.Field<string>("reader_adress"),
+                UserId = row.Field<int>("reader_account")
             };
             return reader;
         }

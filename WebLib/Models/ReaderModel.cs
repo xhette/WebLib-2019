@@ -23,6 +23,8 @@ namespace WebLib.Models
 
         [Required(ErrorMessage = "Пожалуйста, заполните это поле")]
         public string Adress { get; set; }
+
+        public int UserId { get; set; }
         
         public string ConcatReaderName
         {
