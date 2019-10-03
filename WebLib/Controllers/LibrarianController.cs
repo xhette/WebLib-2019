@@ -4,10 +4,12 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using WebLib.Models;
 using WebLib.Models.Repositories;
+using WebLib.Models.Repositories.CompositeModels;
 using WebLib.Models.Repositories.CompositeModels.Books;
 
 namespace WebLib.Controllers
@@ -18,7 +20,9 @@ namespace WebLib.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            int accountId = (int)HttpContext.Session.GetInt32("accountId");
+            UserEmployeeModel model;
+            return View(model);
         }
 
         #region BooksControllers

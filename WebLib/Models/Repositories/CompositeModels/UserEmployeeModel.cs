@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 
 namespace WebLib.Models.Repositories.CompositeModels
 {
-    public class UserReaderModel
+    public class UserEmployeeModel
     {
-        public UserModel User { get; set; }
+        public EmployeeModel EmployeeData { get; set; }
 
-        public ReaderModel Reader { get; set; }
+        public UserModel AccountData { get; set; }
+
     }
 }

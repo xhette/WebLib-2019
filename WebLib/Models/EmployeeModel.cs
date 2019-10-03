@@ -21,6 +21,8 @@ namespace WebLib.Models
         [Required(ErrorMessage = "Пожалуйста, заполните это поле")]
         public string PhoneNumber { get; set; }
 
+        public int UserId { get; set; }
+
         public string ConcatName
         {
             get

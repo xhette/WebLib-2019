@@ -20,6 +20,14 @@ namespace WebLib.Models.Repositories
             };
         }
 
+        public static List<UserModel> UserList (DataSet data)
+        {
+            List<UserModel> users = new List<UserModel>();
+            foreach (DataRow row in data.Tables[0].Rows)
+                users.Add(DataToUser(row));
+            return users;
+        }
+
         public static RoleModel DataToRole (DataRow row)
         {
             return new RoleModel
@@ -27,6 +35,15 @@ namespace WebLib.Models.Repositories
                 RoleId = row.Field<int>("role_id"),
                 RoleName = row.Field<int>("role_name")
             };
+        }
+
+        public static List<RoleModel> RoleList()
+        {
+            List<RoleModel> roles = new List<RoleModel>();
+            DataSet data = DbContext.DbConnection("select * from Roles");
+            foreach (DataRow row in data.Tables[0].Rows)
+                roles.Add(DataToRole(row));
+            return roles;
         }
 
         public static UserRoleModel DataToUserRole (DataRow row)
@@ -45,6 +62,16 @@ namespace WebLib.Models.Repositories
 
             if (data.Tables[0].Rows.Count != 0) return true;
             else return false;
+        }
+
+        public static void RegistryEmployee(RegistryEmployeeModel model)
+        {
+            //TODO: добавить таблицу Employee и процедуру регистрации
+        }
+
+        public static void RegistryReader(RegistryReaderModel model)
+        {
+            string query = String.Format("exec RegistryReader {0}, {1}, {2}, {3}"); //TODO: доделать
         }
     }
 }
