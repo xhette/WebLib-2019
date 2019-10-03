@@ -3892,11 +3892,11 @@
           "ref/netstandard1.0/System.Resources.ResourceManager.dll": {}
         }
       },
-      "System.Runtime/4.3.0": {
+      "System.Runtime/4.3.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0"
+          "Microsoft.NETCore.Platforms": "1.1.1",
+          "Microsoft.NETCore.Targets": "1.1.3"
         },
         "compile": {
           "ref/netstandard1.5/System.Runtime.dll": {}
@@ -10547,12 +10547,13 @@
         "system.resources.resourcemanager.nuspec"
       ]
     },
-    "System.Runtime/4.3.0": {
-      "sha512": "JufQi0vPQ0xGnAczR13AUFglDyVYt4Kqnz1AZaiKZ5+GICq0/1MH/mO/eAJHt/mHW1zjKBJd7kV26SrxddAhiw==",
+    "System.Runtime/4.3.1": {
+      "sha512": "abhfv1dTK6NXOmu4bgHIONxHyEqFjW8HwXPmpY9gmll+ix9UNo4XDcmzJn6oLooftxNssVHdJC1pGT9jkSynQg==",
       "type": "package",
-      "path": "system.runtime/4.3.0",
+      "path": "system.runtime/4.3.1",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -10634,7 +10635,7 @@
         "ref/xamarinmac20/_._",
         "ref/xamarintvos10/_._",
         "ref/xamarinwatchos10/_._",
-        "system.runtime.4.3.0.nupkg.sha512",
+        "system.runtime.4.3.1.nupkg.sha512",
         "system.runtime.nuspec"
       ]
     },
@@ -12557,27 +12558,28 @@
       "Microsoft.AspNetCore.Razor.Design >= 2.1.2",
       "Microsoft.NETCore.App >= 2.1.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.1.9",
-      "System.Data.DataSetExtensions >= 4.5.0"
+      "System.Data.DataSetExtensions >= 4.5.0",
+      "System.Runtime >= 4.3.1"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Margot\\.nuget\\packages\\": {},
+    "C:\\Users\\pc-1\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "Q:\\stydying\\3K2S\\BD\\mine\\WebLib\\WebLib\\WebLib.csproj",
+      "projectUniqueName": "C:\\Users\\pc-1\\Desktop\\WebLib\\WebLib\\WebLib.csproj",
       "projectName": "WebLib",
-      "projectPath": "Q:\\stydying\\3K2S\\BD\\mine\\WebLib\\WebLib\\WebLib.csproj",
-      "packagesPath": "C:\\Users\\Margot\\.nuget\\packages\\",
-      "outputPath": "Q:\\stydying\\3K2S\\BD\\mine\\WebLib\\WebLib\\obj\\",
+      "projectPath": "C:\\Users\\pc-1\\Desktop\\WebLib\\WebLib\\WebLib.csproj",
+      "packagesPath": "C:\\Users\\pc-1\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\pc-1\\Desktop\\WebLib\\WebLib\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Margot\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\pc-1\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -12624,6 +12626,10 @@
           "System.Data.DataSetExtensions": {
             "target": "Package",
             "version": "[4.5.0, )"
+          },
+          "System.Runtime": {
+            "target": "Package",
+            "version": "[4.3.1, )"
           }
         },
         "imports": [

@@ -102,8 +102,8 @@ namespace WebLib.Models.Repositories
         {
             if (model.Patronymic == null) model.Patronymic = "";
             string query = String.Format
-                ("update Readers set reader_surname = '{0}', reader_name = '{1}', reader_patronymic = '{2}', reader_adress = '{3}', reader_phone = '{4}' where reader_card = {5}",
-                model.Surname, model.FirstName, model.Patronymic, model.Adress, model.PhoneNumber, model.Id);
+                ("update Readers set reader_surname = '{0}', reader_name = '{1}', reader_patronymic = '{2}', reader_adress = '{3}', reader_phone = '{4}', reader_account = {6} where reader_card = {5}",
+                model.Surname, model.FirstName, model.Patronymic, model.Adress, model.PhoneNumber, model.Id, model.UserId);
             DataSet data = DbContext.DbConnection(query);
         }
 

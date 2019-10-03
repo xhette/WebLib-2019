@@ -15,7 +15,7 @@ namespace WebLib.Models
 
         public TemporaryRepository()
         {
-            this.undo = 0;
+            //this.undo = 0;
             this.TempJournal = new List<TemporaryModel>();
 
             string query = String.Format("select * from _TempJournal order by operation_time desc");
@@ -34,110 +34,82 @@ namespace WebLib.Models
             }
 
 
-            this.redo = TempJournal.Count - 1;
+            this.undo = TempJournal.Count - 1;
+        }
+
+        public void TemporaryOperation()
+        {
+            switch (TempJournal[undo].TableName)
+            {
+                case "Authors":
+                    Authors(undo);
+                    break;
+                case "Books":
+                    Books(undo);
+                    break;
+                case "Deliveries":
+                    Deliveries(undo);
+                    break;
+                case "Departments":
+                    Departments(undo);
+                    break;
+                case "Issues":
+                    Issues(undo);
+                    break;
+                case "Libraries":
+                    Libraries(undo);
+                    break;
+                case "Readers":
+                    Readers(undo);
+                    break;
+                case "Roles":
+                    Roles(undo);
+                    break;
+                case "Shops":
+                    Shops(undo);
+                    break;
+                case "Users":
+                    Users(undo);
+                    break;
+
+                default: break;
+            }
+
+            TempJournal.Clear();
+            string query = String.Format("select * from _TempJournal order by operation_time desc");
+            DataSet journalData = DbContext.DbConnection(query);
+
+            foreach (DataRow row in journalData.Tables[0].Rows)
+            {
+                TempJournal.Add(new TemporaryModel
+                {
+                    Id = row.Field<int>("id"),
+                    TableName = row.Field<string>("table_name"),
+                    OperationName = row.Field<string>("operation_name"),
+                    OperationDate = row.Field<DateTime>("operation_time"),
+                    ColumnId = row.Field<int>("column_id")
+                });
+            }
         }
 
         public void Undone()
         {
-            redo = 0;
-            string valid = "";
-            string tableName = "";
-            string tempTableName = "";
-            string idName = "";
 
-            switch (TempJournal[undo].TableName)
+            undo--; 
+
+            if (undo >= 0)
             {
-                case "Authors": 
-                    tableName = "Authors";
-                    tempTableName = "Authors_History";
-                    idName = "author_id";
-                    break;
-                case "Books":
-                    tableName = "Books";
-                    tempTableName = "Books_History";
-                    idName = "book_id";
-                    break;
-                case "Deliveries":
-                    tableName = "Deliveries";
-                    tempTableName = "Deliveries_History";
-                    idName = "delivery_id";
-                    break;
-                case "Departments":
-                    tableName = "Departments";
-                    tempTableName = "Departments_History";
-                    idName = "department_id";
-                    break;
-                case "Issues":
-                    tableName = "Issues";
-                    tempTableName = "Issues_History";
-                    idName = "issue_id";
-                    break;
-                case "Libraries":
-                    tableName = "Libraries";
-                    tempTableName = "Libraries_History";
-                    idName = "lib_id";
-                    break;
-                case "Readers": 
-                    tableName = "Readers";
-                    tempTableName = "Readers_History";
-                    idName = "reader_card";
-                    break;
-                case "Roles":
-                    tableName = "Roles";
-                    tempTableName = "Roles_History";
-                    idName = "role_id";
-                    break;
-                case "Shops":
-                    tableName = "Shops";
-                    tempTableName = "Shops_History";
-                    idName = "shop_id";
-                    break;
-                case "Users":
-                    tableName = "Users";
-                    tempTableName = "Users_History";
-                    idName = "user_id";
-                    break;
-                default: break;
-            }
-
-            if (TempJournal[undo].OperationName.Equals("insert"))
-                valid = String.Format("ValidFrom");
-            else valid = String.Format("ValidTo");
-
-            string tempQuery = String.Format("select * from {0} where ({1} = {2}) and ({3} = {4})",
-                tempTableName, idName, TempJournal[undo].ColumnId, valid, TempJournal[undo].OperationDate);
-
-            DataSet data = DbContext.DbConnection(tempQuery);
-
-            switch (TempJournal[undo].TableName)
-            {
-                case "Authors":
-                    break;
-                case "Books":
-                    break;
-                case "Deliveries":
-                    break;
-                case "Departments":
-                    break;
-                case "Issues":
-                    break;
-                case "Libraries":
-                    break;
-                case "Readers":
-                    break;
-                case "Roles":
-                    break;
-                case "Shops":
-                    break;
-                case "Users":
-                    break;
-                default: break;
+                TemporaryOperation();
             }
         }
 
         public void Redone()
         {
-
+            undo++;
+            if (undo < TempJournal.Count-1)
+            {
+                TemporaryOperation();
+            }
         }
 
         private void Authors(int index)
@@ -152,6 +124,7 @@ namespace WebLib.Models
             DataSet tempData = DbContext.DbConnection(tempQuery);
             AuthorModel author = AuthorRepository.DataToModel(tempData.Tables[0].Rows[0]);
             if (!TempJournal[index].OperationName.Equals("delete")) AuthorRepository.Edit(author);
+            else AuthorRepository.Add(author);
         }
 
         private void Books (int index)
@@ -171,6 +144,11 @@ namespace WebLib.Models
                 query = String.Format("update Books set author = {0}, title = '{1}', department = {2} where book_id = {3}",
                 book.AuthorId, book.Title, book.DepartmentId, book.Id);
             }
+            else
+            {
+                query = String.Format("insert into Books vakues ({0}, '{1}', {2})",
+               book.AuthorId, book.Title, book.DepartmentId);
+            }
             DataSet data = DbContext.DbConnection(query);
         }
 
@@ -186,6 +164,7 @@ namespace WebLib.Models
             DataSet tempData = DbContext.DbConnection(tempQuery);
             LibraryModel library = LibraryRepository.DataToModel(tempData.Tables[0].Rows[0]);
             if (!TempJournal[index].OperationName.Equals("delete")) LibraryRepository.Edit(library);
+            else LibraryRepository.Add(library);
         }
 
         private void Deliveries(int index)
@@ -204,6 +183,11 @@ namespace WebLib.Models
             {
                 query = String.Format("update Deliveries set book = {0}, amount = {1}, cost = {2}, summ = {3}, shop = {4} where delivery_id = {5}",
                 delivery.BookId, delivery.Amount, delivery.Cost, delivery.Summ, delivery.Shop, delivery.Id);
+            }
+            else
+            {
+                query = String.Format("insert into Deliveries values ({0}, {1}, {2}, {3}, {4})",
+                delivery.BookId, delivery.Amount, delivery.Cost, delivery.Summ, delivery.Shop);
             }
             DataSet data = DbContext.DbConnection(query);
         }
@@ -230,6 +214,14 @@ namespace WebLib.Models
                         null, issue.Id,
                         issue.ReaderId, issue.OccupiedDate.ToString("yyyy-MM-dd"));
             }
+            else
+            {
+                if (issue.ReturnedDate.HasValue)
+                    query = String.Format("insert into Issues values({1}, '{2}',  '{0}')",
+                      issue.ReturnedDate.Value.ToString("yyyy-MM-dd"), issue.ReaderId, issue.OccupiedDate.ToString("yyyy-MM-dd"));
+                else query = String.Format("insert into Issues values({1}, '{2}',  '{0}')",
+                       null, issue.ReaderId, issue.OccupiedDate.ToString("yyyy-MM-dd"));
+            }
             DataSet data = DbContext.DbConnection(query);
         }
 
@@ -250,6 +242,10 @@ namespace WebLib.Models
                 query = String.Format("update Departments set department_name = {0}, in_library = {1} where department_id = {2}",
                 department.Name, department.LibraryId, department.Id);
             }
+            else
+            {
+                query = String.Format("insert into Departments values ('{0}', {1})", department.Name, department.LibraryId);
+            }
             DataSet data = DbContext.DbConnection(query);
         }
 
@@ -266,6 +262,7 @@ namespace WebLib.Models
             DataSet tempData = DbContext.DbConnection(tempQuery);
             ShopModel shop = ShopRepository.DataToModel(tempData.Tables[0].Rows[0]);
             if (!TempJournal[index].OperationName.Equals("delete")) ShopRepository.Edit(shop);
+            else ShopRepository.Add(shop);
         }
 
         private void Readers(int index)
@@ -301,7 +298,7 @@ namespace WebLib.Models
             UserModel user = UserRepository.DataToUser(tempData.Tables[0].Rows[0]);
             if (!TempJournal[index].OperationName.Equals("delete"))
             {
-                query = String.Format("update Users set user_name = {0}, user_password = {1}, user_role = {2} where user_id = {3}",
+                query = String.Format("update Users set user_name = '{0}', user_password = '{1}', user_role = {2} where user_id = {3}",
                 user.Login, user.Password, user.Post, user.Id);
             } else
             {
@@ -324,7 +321,7 @@ namespace WebLib.Models
             RoleModel role = UserRepository.DataToRole(tempData.Tables[0].Rows[0]);
             if (!TempJournal[index].OperationName.Equals("delete"))
             {
-                query = String.Format("update Roles set role_name = {0} where user_id = {1}",
+                query = String.Format("update Roles set role_name = '{0}' where role_id = {1}",
                 role.RoleName, role.RoleId);
             }
             else
